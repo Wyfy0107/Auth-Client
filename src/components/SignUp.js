@@ -10,7 +10,7 @@ function SignUp({ setSignUp }) {
 
   const registerUser = () => {
     axios
-      .post("/api/user/register", {
+      .post("https://jsonwebtoken-api.herokuapp.com/api/user/register", {
         name: name,
         email: email,
         password: password,

@@ -14,7 +14,7 @@ function App() {
 
   const getToken = (email, password) => {
     axios
-      .post("/api/user/login", {
+      .post("https://jsonwebtoken-api.herokuapp.com/api/user/login", {
         email: email,
         password: password,
       })
@@ -28,7 +28,7 @@ function App() {
   const getInfo = () => {
     axios({
       method: "get",
-      url: "/api/post",
+      url: "https://jsonwebtoken-api.herokuapp.com/api/post",
       headers: {
         "Auth-token": document.cookie.slice(6, document.cookie.length),
       },
