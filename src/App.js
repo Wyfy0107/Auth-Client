@@ -32,7 +32,6 @@ function App() {
       headers: {
         "Auth-token": document.cookie.slice(6, document.cookie.length),
       },
-      withCredentials: true,
     })
       .then((res) => setInfo(res.data.message))
       .catch((err) => console.log(err));
