@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 function App() {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
-  const [info, setInfo] = useState(null);
+  const [token, setToken] = useState(null);
 
   const getToken = (email, password) => {
     axios
@@ -19,21 +19,9 @@ function App() {
         password: password,
       })
       .then((res) => {
+        setToken(res.headers["auth-token"]);
         setLogin(true);
-        getInfo();
       })
-      .catch((err) => alert(err.response.data));
-  };
-
-  const getInfo = () => {
-    axios({
-      method: "get",
-      url: "https://jsonwebtoken-api.herokuapp.com/api/post",
-      headers: {
-        "Auth-token": document.cookie.slice(6, document.cookie.length),
-      },
-    })
-      .then((res) => setInfo(res.data.message))
       .catch((err) => console.log(err));
   };
 
@@ -52,7 +40,7 @@ function App() {
           )}
         </Route>
 
-        <PrivateRoute path='/Profile' login={login} userInfo={info} />
+        <PrivateRoute path='/Profile' login={login} token={token} />
       </Switch>
     </div>
   );
